@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIRA CS Agent — Email Queue</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body data-page="emails">
+
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="sidebar-logo">
+            <h1>MIRA CS Agent</h1>
+            <span>v2 — Email Automation</span>
+        </div>
+        <div class="sidebar-nav">
+            <a href="/" class="active">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" /></svg>
+                <span>Email Queue</span>
+            </a>
+            <a href="/tasks">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h3.75M9 15h3.75M9 18h3.75m3 .75H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08m-5.801 0c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75 2.25 2.25 0 00-.1-.664m-5.8 0A2.251 2.251 0 0113.5 2.25H15a2.25 2.25 0 012.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m0 0H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V9.375c0-.621-.504-1.125-1.125-1.125H8.25zM6.75 12h.008v.008H6.75V12zm0 3h.008v.008H6.75V15zm0 3h.008v.008H6.75V18z" /></svg>
+                <span>Task Tracker</span>
+            </a>
+            <a href="/settings">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z" /><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                <span>Settings</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="page-header">
+            <h2>Email Queue</h2>
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="runNow()" id="btn-run-now-header">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:1rem;height:1rem"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" /></svg>
+                    Process Now
+                </button>
+                <button class="btn btn-secondary" onclick="loadEmailQueue()">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:1rem;height:1rem"><path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182" /></svg>
+                    Refresh
+                </button>
+            </div>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Emails</div>
+                <div class="stat-value" id="stat-total">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Pending</div>
+                <div class="stat-value" id="stat-pending">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Drafts Created</div>
+                <div class="stat-value" id="stat-drafted">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Active Tasks</div>
+                <div class="stat-value" id="stat-tasks">0</div>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-bar">
+            <button class="filter-chip active" data-filter-type="status" data-filter-value="" onclick="setFilter('status','',loadEmailQueue)">All</button>
+            <button class="filter-chip" data-filter-type="status" data-filter-value="pending" onclick="setFilter('status','pending',loadEmailQueue)">Pending</button>
+            <button class="filter-chip" data-filter-type="status" data-filter-value="draft_created" onclick="setFilter('status','draft_created',loadEmailQueue)">Draft Created</button>
+            <button class="filter-chip" data-filter-type="status" data-filter-value="reviewed" onclick="setFilter('status','reviewed',loadEmailQueue)">Reviewed</button>
+            <button class="filter-chip" data-filter-type="status" data-filter-value="archived" onclick="setFilter('status','archived',loadEmailQueue)">Archived</button>
+        </div>
+
+        <!-- Email Table -->
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Subject</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Order</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody id="email-table-body">
+                    <tr><td colspan="6" style="text-align:center;padding:2rem"><div class="spinner"></div></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <!-- Email Detail Modal -->
+    <div class="modal-overlay" id="email-modal">
+        <div class="modal">
+            <div class="modal-header">
+                <div>
+                    <h3 id="modal-subject">—</h3>
+                    <div style="margin-top:0.375rem;font-size:0.813rem;color:#94a3b8">
+                        <span id="modal-from">—</span> &middot; <span id="modal-date">—</span>
+                    </div>
+                    <div style="margin-top:0.375rem;display:flex;gap:0.375rem">
+                        <span id="modal-category"></span>
+                        <span id="modal-status"></span>
+                    </div>
+                </div>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+
+            <div class="modal-section">
+                <h4>Email Body</h4>
+                <div class="content" id="modal-body">—</div>
+            </div>
+
+            <div class="modal-section">
+                <h4>Thread Context</h4>
+                <div class="content" id="modal-thread" style="max-height:200px;overflow-y:auto">—</div>
+            </div>
+
+            <div class="modal-section">
+                <h4>Shopify Order Data</h4>
+                <div class="content" id="modal-shopify">—</div>
+            </div>
+
+            <div class="modal-section">
+                <h4>Rules Applied</h4>
+                <div id="modal-rules">—</div>
+            </div>
+
+            <div class="modal-section">
+                <h4>Draft Reply</h4>
+                <textarea class="draft-editor" id="modal-draft-editor" placeholder="No draft generated yet..."></textarea>
+                <div class="btn-group" style="margin-top:0.75rem">
+                    <button class="btn btn-primary" id="btn-approve-draft" onclick="approveDraft()">Create Gmail Draft</button>
+                    <button class="btn btn-secondary" id="btn-regenerate-draft" onclick="regenerateDraft()">Regenerate</button>
+                    <button class="btn btn-secondary" onclick="saveDraft()">Save Draft</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+    <script>
+        // Process Now button on header
+        async function runNow() {
+            const btn = document.getElementById('btn-run-now-header');
+            btn.disabled = true;
+            btn.innerHTML = '<div class="spinner"></div> Processing...';
+            try {
+                const result = await api('/api/run', { method: 'POST' });
+                showToast(`Processed ${result.emails_processed} emails, created ${result.drafts_created} drafts`, 'success');
+                loadEmailQueue();
+            } catch (err) {
+                showToast(`Error: ${err.message}`, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="width:1rem;height:1rem"><path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z" /></svg> Process Now`;
+            }
+        }
+    </script>
+</body>
+</html>
