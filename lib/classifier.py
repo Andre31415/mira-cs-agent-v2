@@ -177,12 +177,12 @@ def classify_email(subject: str, body: str, thread_context: list[dict] | None = 
 def is_inbound_customer_email(email: dict) -> bool:
     """Check if an email is an inbound customer email (not from team@trymira.com)."""
     from_email = ""
-    if isinstance(email.get("from"), str):
-        from_email = email["from"].lower()
-    elif isinstance(email.get("from_email"), str):
-        from_email = email["from_email"].lower()
-    elif isinstance(email.get("sender"), str):
-        from_email = email["sender"].lower()
+    # Handle multiple possible field names: from_, from, from_email, sender
+    for key in ["from_", "from", "from_email", "sender"]:
+        val = email.get(key, "")
+        if isinstance(val, str) and val:
+            from_email = val.lower()
+            break
 
     # Skip outbound emails
     if "team@trymira.com" in from_email or "team@halo.so" in from_email:
@@ -200,8 +200,8 @@ def is_inbound_customer_email(email: dict) -> bool:
 
 def extract_email_fields(email: dict) -> dict:
     """Extract standard fields from various email formats."""
-    # Handle different email response formats
-    from_raw = email.get("from", email.get("sender", ""))
+    # Handle different email response formats (note: connector uses 'from_' with underscore)
+    from_raw = email.get("from_", email.get("from", email.get("sender", "")))
     from_email = ""
     from_name = ""
 
@@ -220,8 +220,8 @@ def extract_email_fields(email: dict) -> dict:
 
     subject = email.get("subject", "")
     body = email.get("body", email.get("snippet", email.get("text", "")))
-    message_id = email.get("id", email.get("message_id", ""))
-    thread_id = email.get("threadId", email.get("thread_id", ""))
+    message_id = email.get("email_id", email.get("id", email.get("message_id", "")))
+    thread_id = email.get("thread_id", email.get("threadId", ""))
     received_at = email.get("date", email.get("received_at", email.get("internalDate", "")))
     labels = email.get("labels", email.get("labelIds", []))
 

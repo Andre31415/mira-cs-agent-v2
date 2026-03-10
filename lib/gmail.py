@@ -12,13 +12,21 @@ async def search_emails(query: str) -> list[dict]:
     """Search Gmail with the given query string."""
     try:
         result = await call_tool(GMAIL_SOURCE_ID, "search_email", {"queries": [query]})
+        # Response format: {email_results: {emails: [...]}}
+        if isinstance(result, dict):
+            email_results = result.get("email_results", {})
+            if isinstance(email_results, dict):
+                emails = email_results.get("emails", [])
+                if emails:
+                    return emails
+            # Fallback: check other known formats
+            if "emails" in result:
+                return result["emails"]
+            if "results" in result:
+                return result["results"]
         if isinstance(result, list):
             return result
-        if isinstance(result, dict) and "results" in result:
-            return result["results"]
-        if isinstance(result, dict) and "emails" in result:
-            return result["emails"]
-        return result if isinstance(result, list) else []
+        return []
     except Exception as e:
         logger.error(f"Gmail search failed: {e}")
         return []

@@ -1,6 +1,6 @@
 // MIRA CS Agent v2 — Frontend JavaScript
 
-const API_BASE = '__PORT_8000__';
+const API_BASE = '__PORT_8000__'.startsWith('__') ? '' : '__PORT_8000__';
 
 // --- Utility functions ---
 

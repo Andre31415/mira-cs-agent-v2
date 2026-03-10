@@ -127,7 +127,7 @@ def apply_rules(category: str, order_data: dict | None = None,
 
 def _is_our_reply(message: dict) -> bool:
     """Check if a message is from Team MIRA."""
-    from_field = message.get("from", message.get("from_email", "")).lower()
+    from_field = message.get("from_", message.get("from", message.get("from_email", ""))).lower()
     return "team@trymira.com" in from_field or "team@halo.so" in from_field
 
 

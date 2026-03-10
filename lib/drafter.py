@@ -5,10 +5,11 @@ import logging
 import os
 
 import anthropic
+import httpx
 
 logger = logging.getLogger(__name__)
 
-MODEL = "claude-3-5-haiku-latest"
+MODEL = "claude_haiku_4_5"
 
 
 async def generate_draft(
@@ -41,7 +42,7 @@ async def generate_draft(
     )
 
     try:
-        client = anthropic.Anthropic()
+        client = anthropic.Anthropic(http_client=httpx.Client())
         message = client.messages.create(
             model=MODEL,
             max_tokens=1024,
@@ -145,7 +146,7 @@ def _build_prompt(
 
 def _is_team(msg: dict) -> bool:
     """Check if message is from MIRA team."""
-    from_field = msg.get("from", msg.get("from_email", "")).lower()
+    from_field = msg.get("from_", msg.get("from", msg.get("from_email", ""))).lower()
     return "team@trymira.com" in from_field or "team@halo.so" in from_field
 
 
